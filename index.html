@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="The Friendsgiving Menu Planner allows users to create and organize menus by category, add and manage dish ingredients for dietary needs, edit and remove food contributions, and RSVP to the event. "
+    />
+    <meta name="authors" content="Sebastian Sanchez, Gill Hermelin, and Sri." />
+    <meta
+      name="keywords"
+      content="friends, friendsgiving, menu, planner, food,"
+    />
+    <link rel="stylesheet" href="./pages/index.css" />
+    <title>Friendsgiving Menu Planner</title>
+  </head>
+  <body>
+    <div class="page">
+      <header class="header">
+        <nav class="nav">
+          <ul class="nav__links">
+            <li>
+              <a href="#contributions" class="nav__link">Contributions</a>
+            </li>
+            <li>
+              <a href="#dinner-menu" class="nav__link">Dinner Menu</a>
+            </li>
+            <li>
+              <a href="#RSVP-list" class="nav__link">RSVP List</a>
+            </li>
+            <li>
+              <button class="nav__link-button">RSVP</button>
+            </li>
+          </ul>
+        </nav>
+        <h1 class="header__title">Friendsgiving Dinner</h1>
+        <p class="header__subtitle">November 21, 2024</p>
+      </header>
+
+      <main class="content">
+        <section id="contributions" class="contributions">
+          <div class="contributions__content">
+            <h2 class="contributions__title">Contributions</h2>
+            <button type="button" class="contributions__add-button">
+              Add Dish
+            </button>
+            <ul class="cards__list">
+              <template id="card-template">
+                <li class="card">
+                  <img src="" alt="" class="card__image" />
+                  <div class="card__content">
+                    <h2 class="card__title"></h2>
+                  </div>
+                </li>
+              </template>
+            </ul>
+          </div>
+        </section>
+
+        <section id="dinner-menu" class="dinner-menu">
+          <div class="dinner-menu__content">
+            <h2 class="dinner-menu__title">Dinner Menu</h2>
+          </div>
+        </section>
+      </main>
+      <footer class="footer">
+        <p class="footer__content">2024 &copy; Friends Menu Planner</p>
+      </footer>
+    </div>
+  </body>
+</html>
