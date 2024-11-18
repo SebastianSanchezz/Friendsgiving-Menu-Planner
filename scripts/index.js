@@ -59,25 +59,12 @@ function closeModalEsc(e) {
   }
 }
 
-// profileEditButton.addEventListener("click", () => {
-//   profileInputTilte.value = profilename.textContent;
-//   profileInputDescription.value = profiledescription.textContent;
-//   openPopup(profileEditModal);
-// });
-
 const closeButtons = document.querySelectorAll(".modal__close");
 
 closeButtons.forEach((button) => {
   const popup = button.closest(".modal");
   button.addEventListener("click", () => closePopup(popup));
 });
-
-// profileEditForm.addEventListener("submit", (e) => {
-//   e.preventDefault();
-//   profilename.textContent = profileInputTilte.value;
-//   profiledescription.textContent = profileInputDescription.value;
-//   closePopup(profileEditModal);
-// });
 
 addDishbutton.addEventListener("click", (e) => {
   e.preventDefault();
