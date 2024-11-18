@@ -7,7 +7,10 @@
       name="description"
       content="The Friendsgiving Menu Planner allows users to create and organize menus by category, add and manage dish ingredients for dietary needs, edit and remove food contributions, and RSVP to the event. "
     />
-    <meta name="authors" content="Sebastian Sanchez, Gill Hermelin, and Sri Duvvuri." />
+    <meta
+      name="authors"
+      content="Sebastian Sanchez, Gill Hermelin, and Sri Duvvuri."
+    />
     <meta
       name="keywords"
       content="friends, friendsgiving, menu, planner, food,"
@@ -48,66 +51,21 @@
             <ul class="cards__list">
               <template id="card-template">
                 <li class="card">
-                  <img src="" alt="" class="card__image" />
                   <div class="card__content">
+                    <button class="card__delete-button" type="button"></button>
+                    <button class="card__edit-button" type="button">
+                      Edit
+                    </button>
                     <h3 class="card__title"></h3>
                     <p class="card__subtitle"></p>
+                    <img src="" alt="" class="card__image" />
+
+                    <h3 class="card__title"></h3>
+                    <p class="card__subtitle"></p>
+                    <p class="card__chef-name"></p>
                   </div>
                 </li>
               </template>
-
-              <li class="card">
-                <div class="card__content">
-                  <button class="card__edit-button">Edit</button>
-                  <h3 class="card__title">Lobster Mac and Cheese</h3>
-                  <p class="card__subtitle">Side Dish</p>
-                  <img
-                    src="./images/Lobster Mac and Cheese.jpg"
-                    alt="Lobster Mac and Cheese"
-                    class="card__image"
-                  />
-                  <p class="card__chef-name">Arthur</p>
-                </div>
-              </li>
-              <li class="card">
-                <div class="card__content">
-                  <button class="card__edit-button">Edit</button>
-                  <h3 class="card__title">Apple Flambé Pie</h3>
-                  <p class="card__subtitle">Dessert</p>
-                  <img
-                    src="./images/Apple Flambé Pie.jpg"
-                    alt="Apple Flambé Pie"
-                    class="card__image"
-                  />
-                  <p class="card__chef-name">Cory</p>
-                </div>
-              </li>
-              <li class="card">
-                <div class="card__content">
-                  <button class="card__edit-button">Edit</button>
-                  <h3 class="card__title">Antipasto Skewers</h3>
-                  <p class="card__subtitle">Appetizer</p>
-                  <img
-                    src="./images/Antipasto Skewers.jpg"
-                    alt="Antipasto Skewers"
-                    class="card__image"
-                  />
-                  <p class="card__chef-name">Luciano</p>
-                </div>
-              </li>
-              <li class="card">
-                <div class="card__content">
-                  <button class="card__edit-button">Edit</button>
-                  <h3 class="card__title">Salmon Wellington</h3>
-                  <p class="card__subtitle">Main Dish</p>
-                  <img
-                    src="./images/Salmon Wellington.jpg"
-                    alt="Salmon Wellington"
-                    class="card__image"
-                  />
-                  <p class="card__chef-name">Katrina</p>
-                </div>
-              </li>
             </ul>
           </div>
         </section>
@@ -129,5 +87,70 @@
         <p class="footer__content">2024 &copy; Friends Menu Planner</p>
       </footer>
     </div>
+    <div class="modal" id="card-add-modal">
+      <div class="modal__container">
+        <button class="modal__close" id="add-modal-close"></button>
+        <h2 class="modal__heading">Add Dish</h2>
+        <form name="card-form" class="modal__form">
+          <div class="modal__input-container">
+            <input
+              class="modal__input"
+              id="dish-input"
+              type="text"
+              name="Dish Name"
+              placeholder="Dish Name"
+              minlength="1"
+              required
+            />
+            <span
+              class="modal__error modal__error-text-visible"
+              id="dish-input-error"
+            ></span>
+            <select
+              class="modal__input"
+              id="dish-input"
+              name="Dish Category"
+              required
+            >
+              <option value="select">Select</option>
+              <option value="Side Dish">Side Dish</option>
+              <option value="Dessert">Dessert</option>
+              <option value="Appetizer">Appetizer</option>
+              <option value="Main Dish">Main Dish</option>
+            </select>
+            <span
+              class="modal__error modal__error-text-visible"
+              id="dish-input-error"
+            ></span>
+            <input
+              class="modal__input"
+              id="dish-input"
+              type="text"
+              name="Ingredients"
+              placeholder="Ingredients"
+              required
+            />
+            <span
+              class="modal__error modal__error-text-visible"
+              id="dish-input-error"
+            ></span>
+            <input
+              class="modal__input"
+              id="dish-input-url"
+              type="text"
+              name="Dish Image URL"
+              placeholder="Image URL"
+              required
+            />
+            <span
+              class="modal__error modal__error-text-visible"
+              id="dish-input-url-error"
+            ></span>
+          </div>
+          <button class="modal__button">Save</button>
+        </form>
+      </div>
+    </div>
+    <script src="./scripts/index.js"></script>
   </body>
 </html>
