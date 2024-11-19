@@ -1,0 +1,63 @@
+.RSVP-list {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(
+    to bottom,
+    #d2b48c,
+    blanchedalmond
+  ); /* Transition from a darker tan to blanchedalmond */
+  padding-bottom: 40px;
+}
+
+.RSVP-list__title {
+  font-family: "Caveat SemiBold", sans-serif;
+  font-weight: 600;
+  font-size: 70px;
+  line-height: 1.2;
+  margin: 20px 0 20px;
+}
+
+.RSVP-list__items {
+  display: flex;
+  list-style-type: none;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  gap: 10px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.rsvp-delete-button {
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.7s ease-in-out;
+}
+
+.rsvp-delete-button:hover {
+  opacity: 0.5;
+}
+
+.rsvp-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  background-color: rgb(255, 237, 221);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.rsvp-item span {
+  flex: 1;
+  text-align: center;
+}

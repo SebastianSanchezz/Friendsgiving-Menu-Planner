@@ -1,0 +1,31 @@
+@font-face {
+  font-family: "Caveat";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../vendor//fonts/Caveat-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Caveat SemiBold";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../vendor/fonts/Caveat-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../vendor/fonts/Roboto-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Roboto Italic";
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../vendor/fonts/Roboto-BoldItalic.ttf") format("truetype");
+}

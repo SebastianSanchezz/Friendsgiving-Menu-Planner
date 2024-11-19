@@ -14,14 +14,18 @@ const rsvpNameInput = document.querySelector("#rsvp-name-input");
 const rsvpList = document.querySelector("#rsvp-list");
 
 // Dinner Menu Category Lists
-const startersList = document.querySelector("#starter .menu-category__list");
+const startersList = document.querySelector(
+  "#starter .dinner-menu-category__list"
+);
 const sideDishesList = document.querySelector(
-  "#side-dishes .menu-category__list"
+  "#side-dishes .dinner-menu-category__list"
 );
 const mainCoursesList = document.querySelector(
-  "#main-courses .menu-category__list"
+  "#main-courses .dinner-menu-category__list"
 );
-const dessertsList = document.querySelector("#desserts .menu-category__list");
+const dessertsList = document.querySelector(
+  "#desserts .dinner-menu-category__list"
+);
 
 // Input Fields for Adding a New Dish
 const addNewName = document.querySelector("#dish-name-input");
@@ -81,7 +85,7 @@ function updateCountdown() {
   const seconds = Math.floor(totalSeconds % 60);
 
   // Format the countdown string
-  const countdownText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+  const countdownText = `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
 
   // Display the countdown in the #countdown element
   const countdownElement = document.getElementById("countdown");
@@ -144,19 +148,29 @@ function renderRsvp(rsvp) {
   const nameElement = document.createElement("span");
   nameElement.textContent = rsvp.name;
 
+  // Create the delete button
   const deleteButton = document.createElement("button");
-  deleteButton.textContent = "Delete";
-  deleteButton.classList.add("rsvp-delete-button"); // Class for RSVP button
+  deleteButton.classList.add("rsvp-delete-button");
+
+  // Create an img element for the delete icon
+  const deleteIcon = document.createElement("img");
+  deleteIcon.src = "../images/delete-btn.svg";
+  deleteIcon.alt = "Delete";
+  deleteIcon.style.width = "18px";
+  deleteIcon.style.height = "18px";
+
+  // Append the img to the button
+  deleteButton.appendChild(deleteIcon);
 
   listItem.appendChild(nameElement);
   listItem.appendChild(deleteButton);
   rsvpList.appendChild(listItem);
 
+  // Add the event listener to the delete button
   deleteButton.addEventListener("click", () => {
     deleteRsvp(listItem);
   });
 }
-
 // Function to Delete an RSVP
 function deleteRsvp(listItem) {
   const rsvpId = listItem.dataset.id;
