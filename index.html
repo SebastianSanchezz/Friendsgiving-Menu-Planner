@@ -33,7 +33,7 @@
               <a href="#RSVP-list" class="nav__link">RSVP List</a>
             </li>
             <li>
-              <button href="#RSVP-button" class="nav__link">RSVP</button>
+              <button id="RSVP-button" class="nav__link">RSVP</button>
             </li>
           </ul>
         </nav>
@@ -53,15 +53,9 @@
                 <li class="card">
                   <div class="card__content">
                     <button class="card__delete-button" type="button"></button>
-                    <button class="card__edit-button" type="button">
-                      Edit
-                    </button>
                     <h3 class="card__title"></h3>
                     <p class="card__subtitle"></p>
                     <img src="" alt="" class="card__image" />
-
-                    <h3 class="card__title"></h3>
-                    <p class="card__subtitle"></p>
                     <p class="card__chef-name"></p>
                   </div>
                 </li>
@@ -70,22 +64,66 @@
           </div>
         </section>
 
+        <!-- dinner menu section -->
         <section id="dinner-menu" class="dinner-menu">
           <div class="dinner-menu__content">
             <h2 class="dinner-menu__title">Dinner Menu</h2>
+            <div class="dinner-menu__categories">
+              <div class="menu-category" id="starter">
+                <h3 class="menu-category__title">Starters</h3>
+                <ul class="menu-category__list" id="starters-list"></ul>
+              </div>
+              <div class="menu-category" id="side-dishes">
+                <h3 class="menu-category__title">Side Dishes</h3>
+                <ul class="menu-category__list" id="side-dishes-list"></ul>
+              </div>
+              <div class="menu-category" id="main-courses">
+                <h3 class="menu-category__title">Main Courses</h3>
+                <ul class="menu-category__list" id="main-courses-list"></ul>
+              </div>
+              <div class="menu-category" id="desserts">
+                <h3 class="menu-category__title">Desserts</h3>
+                <ul class="menu-category__list" id="desserts-list"></ul>
+              </div>
+            </div>
           </div>
         </section>
+        <!-- dinner menu section -->
 
-        <section id="RSVP-list" class="#RSVP-list">
+        <!-- rsvp list -->
+        <section id="RSVP-list" class="RSVP-list">
           <div class="RSVP-list__content">
             <h2 class="dinner-menu__title">RSVP List</h2>
+            <ul class="RSVP-list__items" id="rsvp-list">
+              <!-- RSVP names will appear here -->
+            </ul>
           </div>
         </section>
+        <!-- rsvp list -->
       </main>
 
       <footer class="footer">
         <p class="footer__content">2024 &copy; Friends Menu Planner</p>
       </footer>
+    </div>
+
+    <!-- rsvp modal -->
+    <div class="modal" id="rsvp-modal">
+      <div class="modal__container">
+        <button class="modal__close" id="rsvp-modal-close"></button>
+        <h2 class="modal__heading">RSVP</h2>
+        <form id="rsvp-form" class="modal__form">
+          <input
+            id="rsvp-name-input"
+            class="modal__input"
+            type="text"
+            placeholder="Your Name"
+            required
+          />
+          <button type="submit" class="modal__button">RSVP</button>
+        </form>
+      </div>
+      <!-- rsvp modal -->
     </div>
     <div class="modal" id="card-add-modal">
       <div class="modal__container">
@@ -95,7 +133,7 @@
           <div class="modal__input-container">
             <input
               class="modal__input"
-              id="dish-input"
+              id="dish-name-input"
               type="text"
               name="Dish Name"
               placeholder="Dish Name"
@@ -108,15 +146,15 @@
             ></span>
             <select
               class="modal__input"
-              id="dish-input"
+              id="dish-category-input"
               name="Dish Category"
               required
             >
               <option value="select">Select</option>
               <option value="Side Dish">Side Dish</option>
               <option value="Dessert">Dessert</option>
-              <option value="Appetizer">Appetizer</option>
-              <option value="Main Dish">Main Dish</option>
+              <option value="Starter">Starter</option>
+              <option value="Main Course">Main Course</option>
             </select>
             <span
               class="modal__error modal__error-text-visible"
@@ -124,7 +162,7 @@
             ></span>
             <input
               class="modal__input"
-              id="dish-input"
+              id="dish-ingredients-input"
               type="text"
               name="Ingredients"
               placeholder="Ingredients"
@@ -136,7 +174,7 @@
             ></span>
             <input
               class="modal__input"
-              id="dish-input-url"
+              id="dish-image-url-input"
               type="text"
               name="Dish Image URL"
               placeholder="Image URL"
