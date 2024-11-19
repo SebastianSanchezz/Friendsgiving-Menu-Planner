@@ -37,13 +37,13 @@
             </li>
           </ul>
         </nav>
-        <h1 class="header__title">Friendsgiving Dinner</h1>
+        <h1 class="header__title">Friendsgiving Menu Planner</h1>
         <!-- Countdown Display -->
         <div id="countdown" class="header__countdown">
-          <p id="loading-text">Loading countdown...</p>
+          <p id="header__loading-text">Loading countdown...</p>
         </div>
         <!-- Countdown Display -->
-        <p class="header__subtitle">November 28, 2024</p>
+        <p class="header__subtitle">Thanksgiving - November 28, 2024</p>
       </header>
 
       <main class="content">
@@ -53,7 +53,7 @@
             <button type="button" class="contributions__add-button">
               Add Dish
             </button>
-            <ul class="cards-list">
+            <ul class="cards__list">
               <template id="card-template">
                 <li class="card">
                   <div class="card__front">
@@ -84,25 +84,31 @@
         </section>
 
         <!-- dinner menu section -->
-        <section id="dinner-menu" class="dinner-menu">
+        <section id="dinner-menu" class="dinner__menu">
           <div class="dinner-menu__content">
             <h2 class="dinner-menu__title">Dinner Menu</h2>
             <div class="dinner-menu__categories">
-              <div class="menu-category" id="starter">
-                <h3 class="menu-category__title">Starters</h3>
-                <ul class="menu-category__list" id="starters-list"></ul>
+              <div class="dinner-menu-category" id="starter">
+                <h3 class="dinner-menu-category__title">Starters</h3>
+                <ul class="dinner-menu-category__list" id="starters-list"></ul>
               </div>
-              <div class="menu-category" id="side-dishes">
-                <h3 class="menu-category__title">Side Dishes</h3>
-                <ul class="menu-category__list" id="side-dishes-list"></ul>
+              <div class="dinner-menu-category" id="side-dishes">
+                <h3 class="dinner-menu-category__title">Side Dishes</h3>
+                <ul
+                  class="dinner-menu-category__list"
+                  id="side-dishes-list"
+                ></ul>
               </div>
-              <div class="menu-category" id="main-courses">
-                <h3 class="menu-category__title">Main Courses</h3>
-                <ul class="menu-category__list" id="main-courses-list"></ul>
+              <div class="dinner-menu-category" id="main-courses">
+                <h3 class="dinner-menu-category__title">Main Courses</h3>
+                <ul
+                  class="dinner-menu-category__list"
+                  id="main-courses-list"
+                ></ul>
               </div>
-              <div class="menu-category" id="desserts">
-                <h3 class="menu-category__title">Desserts</h3>
-                <ul class="menu-category__list" id="desserts-list"></ul>
+              <div class="dinner-menu-category" id="desserts">
+                <h3 class="dinner-menu-category__title">Desserts</h3>
+                <ul class="dinner-menu-category__list" id="desserts-list"></ul>
               </div>
             </div>
           </div>
@@ -111,8 +117,8 @@
 
         <!-- rsvp list -->
         <section id="RSVP-list" class="RSVP-list">
+          <h2 class="RSVP-list__title">RSVP List</h2>
           <div class="RSVP-list__content">
-            <h2 class="dinner-menu__title">RSVP List</h2>
             <ul class="RSVP-list__items" id="rsvp-list">
               <!-- RSVP names will appear here -->
             </ul>
@@ -171,9 +177,9 @@
             >
               <option value="select">Select</option>
               <option value="Side Dish">Appetizer</option>
-              <option value="Dessert">Main Dish</option>
+              <option value="Main Course">Main Dish</option>
               <option value="Appetizer">Side Dish</option>
-              <option value="Main Dish">Dessert</option>
+              <option value="Dessert">Dessert</option>
             </select>
             <span
               class="modal__error modal__error-text-visible"

@@ -1,9 +1,106 @@
+.header {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(
+    135deg,
+    #bb9967,
+    #a97c4b,
+    #d59a2b,
+    #c28b53,
+    #e7c18a
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 10s ease infinite;
+  padding-bottom: 40px;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 .header__title {
   display: flex;
   justify-content: center;
+  font-family: "Roboto Italic", sans-serif;
+  font-weight: 700;
+  font-size: 90px;
+  line-height: 1.2;
+  margin-bottom: 0;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2), -2px -2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .header__subtitle {
   display: flex;
   justify-content: center;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1.2;
+  margin: 0;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2), -2px -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Countdown container styling */
+.header__countdown {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: #282725;
+  text-align: center;
+  padding: 20px 40px;
+  background: linear-gradient(135deg, #a97c4b, #d59a2b, #6a4e23);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  max-width: 80%;
+  margin: 30px auto 20px;
+  animation: fadeIn 1s ease-out;
+}
+
+/* Loading text style */
+#header__loading-text {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: #282725;
+  margin-bottom: 20px;
+  opacity: 0.8;
+  animation: bounceIn 1.5s ease infinite;
+}
+
+/* Keyframe for fade-in effect */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Keyframe for bouncing effect on loading text */
+@keyframes bounceIn {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }

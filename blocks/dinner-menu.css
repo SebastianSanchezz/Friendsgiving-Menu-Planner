@@ -1,0 +1,38 @@
+.dinner__menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #d09d30, #d2b48c);
+  padding-bottom: 50px;
+}
+
+.dinner-menu__title {
+  font-family: "Caveat SemiBold", sans-serif;
+  font-weight: 600;
+  font-size: 70px;
+  line-height: 1.2;
+  margin: 20px 0 20px;
+}
+
+.dinner-menu-category__title {
+  margin: 0 auto;
+  width: fit-content;
+  text-decoration: underline;
+  font-family: "Roboto Italic", sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.dinner-menu-category__list {
+  display: flex;
+  list-style-type: none;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  gap: 10px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.2;
+}
