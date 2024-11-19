@@ -1,0 +1,59 @@
+.cards__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  padding: 0;
+  margin: 20px auto;
+  width: 100%;
+  max-width: 800px;
+}
+
+.card {
+  display: flex;
+  position: relative;
+  padding: 10px;
+  width: 100%;
+  background-color: tan;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.card__front {
+  text-align: center;
+  flex-grow: 1;
+}
+
+.card__delete-button {
+  display: flex;
+  justify-content: flex-start;
+  color: gray;
+  background: none;
+  border-style: none;
+  cursor: pointer;
+}
+
+.card__title {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 20px 0 5px;
+}
+
+.card__subtitle {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.card__image {
+  object-fit: cover;
+  width: 150px;
+  border-radius: 8px;
+}
+
+.card__ingredients-button {
+  margin-top: 10px;
+  padding: 5px;
+  border-radius: 4px;
+  text-align: center;
+  border: 1px solid black;
+  cursor: pointer;
+}

@@ -67,6 +67,30 @@ rsvpButton.addEventListener("click", () => {
   openPopup(rsvpModal);
 });
 
+// Countdown function
+function updateCountdown() {
+  const thanksgivingDate = new Date("November 28, 2024 00:00:00"); // Thanksgiving Date
+  const currentDate = new Date(); // Current Date and Time
+
+  const totalSeconds = (thanksgivingDate - currentDate) / 1000; // Total time remaining in seconds
+
+  // Calculate days, hours, minutes, and seconds
+  const days = Math.floor(totalSeconds / (60 * 60 * 24));
+  const hours = Math.floor((totalSeconds % (60 * 60 * 24)) / (60 * 60));
+  const minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
+  const seconds = Math.floor(totalSeconds % 60);
+
+  // Format the countdown string
+  const countdownText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+  // Display the countdown in the #countdown element
+  const countdownElement = document.getElementById("countdown");
+  countdownElement.textContent = `Countdown: ${countdownText}`;
+}
+
+// Update the countdown every second
+setInterval(updateCountdown, 1000);
+
 // Function to Fetch All RSVPs
 function getRSVPs() {
   fetch(`${apiUrl}api/rsvps`)
@@ -226,8 +250,6 @@ function getCardElement(dish) {
   card.querySelector(".card__title").textContent = dish.name;
   card.querySelector(".card__subtitle").textContent = dish.category;
   card.querySelector(".card__image").src = dish.imageUrl;
-  card.querySelector(".card__chef-name").textContent =
-    dish.chefName || "Anonymous Chef";
 
   const deleteButton = card.querySelector(".card__delete-button");
 
@@ -284,10 +306,24 @@ function addNewDish(dishData) {
   })
     .then((response) => response.json())
     .then((data) => {
-      renderCard(data, cardsWrap);
-      renderDinnerMenu(data);
+      console.log("Dish data returned from API:", data);
+
+      if (
+        data.dish &&
+        data.dish.name &&
+        data.dish.category &&
+        data.dish.ingredients &&
+        data.dish.imageUrl
+      ) {
+        renderCard(data.dish, cardsWrap);
+        renderDinnerMenu(data.dish);
+      } else {
+        console.error("Incomplete dish data");
+      }
     })
-    .catch((error) => console.error("Error adding dish:", error));
+    .catch((error) => {
+      console.error("Error adding dish:", error);
+    });
 }
 
 // Initial Data Fetch on Load

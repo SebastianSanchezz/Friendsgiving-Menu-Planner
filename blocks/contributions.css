@@ -1,0 +1,25 @@
+.contributions__content {
+  background-image: url(/images/Fall.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: hidden;
+}
+
+.contributions__title {
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+  color: white;
+  -webkit-text-stroke: 0.7px black;
+}
+
+.contributions__add-button {
+  display: block;
+  margin: 0 auto 10px;
+  background-color: black;
+  color: white;
+  border-style: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
