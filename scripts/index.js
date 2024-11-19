@@ -1,45 +1,41 @@
-const initialCards = [
-  {
-    name: "Lobster Mac and Cheese",
-    type: "Side Dish",
-    link: "./images/Lobster Mac and Cheese.jpg",
-    chefName: "Arthur",
-  },
-  {
-    name: "Apple Flambé Pie",
-    type: "Dessert",
-    link: "./images/Apple Flambé Pie.jpg",
-    chefName: "Cory",
-  },
-  {
-    name: "Antipasto Skewers",
-    type: "Appetizer",
-    link: "./images/Antipasto Skewers.jpg",
-    chefName: "Luciano",
-  },
-  {
-    name: "Salmon Wellington",
-    type: "Main Dish",
-    link: "./images/Salmon Wellington.jpg",
-    chefName: "Katrina",
-  },
-];
+// Connection to backend api
+const apiUrl = "https://api.friendsgiving-menu.fr.to/";
 
+// DOM Element References
 const cardTemplate = document.querySelector("#card-template");
-const cardsList = document.querySelector(".cards__list");
-const addDishbutton = document.querySelector(".contributions__add-button");
-const addDishModal = document.querySelector("#adddish-modal");
-const cardModalCaption = document.querySelector(".modal__caption");
-const addDishImage = document.querySelector(".modal__image");
 const cardsWrap = document.querySelector(".cards__list");
+const addDishButton = document.querySelector(".contributions__add-button");
 const cardAddModal = document.querySelector("#card-add-modal");
-const cardAddForm = document.forms["card-form"];
+const addDishForm = document.forms["card-form"];
+const rsvpButton = document.querySelector("#RSVP-button");
+const rsvpModal = document.querySelector("#rsvp-modal");
+const rsvpForm = document.querySelector("#rsvp-form");
+const rsvpNameInput = document.querySelector("#rsvp-name-input");
+const rsvpList = document.querySelector("#rsvp-list");
 
+// Dinner Menu Category Lists
+const startersList = document.querySelector("#starter .menu-category__list");
+const sideDishesList = document.querySelector(
+  "#side-dishes .menu-category__list"
+);
+const mainCoursesList = document.querySelector(
+  "#main-courses .menu-category__list"
+);
+const dessertsList = document.querySelector("#desserts .menu-category__list");
+
+// Input Fields for Adding a New Dish
+const addNewName = document.querySelector("#dish-name-input");
+const addNewCategory = document.querySelector("#dish-category-input");
+const addNewIngredients = document.querySelector("#dish-ingredients-input");
+const addNewImageUrl = document.querySelector("#dish-image-url-input");
+
+// Open and Close Modal Functions
 function openPopup(pop) {
   pop.classList.add("modal_opened");
   document.addEventListener("keydown", closeModalEsc);
   pop.addEventListener("mousedown", closeOverlay);
 }
+
 function closePopup(pop) {
   pop.classList.remove("modal_opened");
   document.removeEventListener("keydown", closeModalEsc);
@@ -55,73 +51,247 @@ function closeOverlay(e) {
 function closeModalEsc(e) {
   if (e.key === "Escape") {
     const modalOpened = document.querySelector(".modal_opened");
-    closePopup(modalOpened);
+    if (modalOpened) closePopup(modalOpened);
   }
 }
 
+// Close Buttons for Modals
 const closeButtons = document.querySelectorAll(".modal__close");
-
 closeButtons.forEach((button) => {
   const popup = button.closest(".modal");
   button.addEventListener("click", () => closePopup(popup));
 });
 
-addDishbutton.addEventListener("click", (e) => {
+// Open RSVP Modal
+rsvpButton.addEventListener("click", () => {
+  openPopup(rsvpModal);
+});
+
+// Function to Fetch All RSVPs
+function getRSVPs() {
+  fetch(`${apiUrl}api/rsvps`)
+    .then((response) => response.json())
+    .then((data) => {
+      if (Array.isArray(data)) {
+        data.forEach((rsvp) => renderRsvp(rsvp));
+      } else {
+        console.error("Unexpected data format:", data);
+      }
+    })
+    .catch((error) => console.error("Error fetching RSVPs:", error));
+}
+
+// Handle RSVP Form Submission
+rsvpForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const name = rsvpNameInput.value.trim();
+  if (name) {
+    addRsvp(name);
+    rsvpNameInput.value = "";
+    closePopup(rsvpModal);
+  }
+});
+
+// Function to Add a New RSVP
+function addRsvp(name) {
+  const newRsvp = { name };
+
+  fetch(`${apiUrl}api/rsvps`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newRsvp),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      renderRsvp(data);
+    })
+    .catch((error) => console.error("Error adding RSVP:", error));
+}
+
+// Function to Render an RSVP Item with Delete Button
+function renderRsvp(rsvp) {
+  const listItem = document.createElement("li");
+  listItem.classList.add("rsvp-item");
+  listItem.dataset.id = rsvp._id;
+
+  const nameElement = document.createElement("span");
+  nameElement.textContent = rsvp.name;
+
+  const deleteButton = document.createElement("button");
+  deleteButton.textContent = "Delete";
+  deleteButton.classList.add("rsvp-delete-button"); // Class for RSVP button
+
+  listItem.appendChild(nameElement);
+  listItem.appendChild(deleteButton);
+  rsvpList.appendChild(listItem);
+
+  deleteButton.addEventListener("click", () => {
+    deleteRsvp(listItem);
+  });
+}
+
+// Function to Delete an RSVP
+function deleteRsvp(listItem) {
+  const rsvpId = listItem.dataset.id;
+
+  if (rsvpId) {
+    fetch(`${apiUrl}api/rsvps/${rsvpId}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then(() => {
+        listItem.remove();
+      })
+      .catch((error) => console.error("Error deleting RSVP:", error));
+  }
+}
+
+// Add Dish Button Event
+addDishButton.addEventListener("click", (e) => {
   e.preventDefault();
   openPopup(cardAddModal);
 });
 
-function rendercard(data, wrapper) {
-  const cardElement = getcardElement(data);
-  wrapper.prepend(cardElement);
+// Fetch All Dishes from the API and Display Them
+function loadDishes() {
+  fetch(`${apiUrl}api/dishes`)
+    .then((response) => response.json())
+    .then((data) => {
+      if (Array.isArray(data)) {
+        data.forEach((dish) => {
+          renderCard(dish, cardsWrap);
+          renderDinnerMenu(dish);
+        });
+      } else {
+        console.error("Unexpected data format:", data);
+      }
+    })
+    .catch((error) => console.error("Error fetching dishes:", error));
 }
 
-initialCards.forEach((data) => rendercard(data, cardsWrap));
+// Function to Render Dish in the Dinner Menu Category
+function renderDinnerMenu(dish) {
+  const normalizedCategory = dish.category.trim(); // Normalize category by trimming spaces and ensuring the case matches the backend
 
-function getcardElement(cardData) {
-  const cardElement = cardTemplate.content
-    .querySelector(".card")
-    .cloneNode(true);
+  const dishItem = document.createElement("li");
+  dishItem.textContent = dish.name;
+
+  // Logging for debugging
+  console.log("Dish category (from API):", dish.category);
+  console.log("Normalized category (checked):", normalizedCategory);
+
+  // Ensure list exists before append
+  switch (normalizedCategory) {
+    case "Starter":
+      if (startersList) {
+        startersList.appendChild(dishItem);
+      } else {
+        console.warn("Starters list not found.");
+      }
+      break;
+    case "Side Dish":
+      if (sideDishesList) {
+        sideDishesList.appendChild(dishItem);
+      } else {
+        console.warn("Side dishes list not found.");
+      }
+      break;
+    case "Main Course":
+      if (mainCoursesList) {
+        mainCoursesList.appendChild(dishItem);
+      } else {
+        console.warn("Main courses list not found.");
+      }
+      break;
+    case "Dessert":
+      if (dessertsList) {
+        dessertsList.appendChild(dishItem);
+      } else {
+        console.warn("Desserts list not found.");
+      }
+      break;
+    default:
+      console.warn(`Unknown category: ${dish.category}`);
+  }
+}
+
+// Function to create a new dish card element
+function getCardElement(dish) {
+  const cardClone = cardTemplate.content.cloneNode(true);
+
+  const card = cardClone.querySelector(".card");
+  card.querySelector(".card__title").textContent = dish.name;
+  card.querySelector(".card__subtitle").textContent = dish.category;
+  card.querySelector(".card__image").src = dish.imageUrl;
+  card.querySelector(".card__chef-name").textContent =
+    dish.chefName || "Anonymous Chef";
+
+  const deleteButton = card.querySelector(".card__delete-button");
+
+  deleteButton.addEventListener("click", () => deleteDish(dish._id));
+
+  return card;
+}
+
+// Render Each Card Using Data
+function renderCard(dish, container) {
+  const cardElement = getCardElement(dish);
+  container.appendChild(cardElement);
+
   const deleteButton = cardElement.querySelector(".card__delete-button");
-  const cardImageEl = cardElement.querySelector(".card__image");
-  const cardTitleEl = cardElement.querySelector(".card__title");
-  const cardSubtitleEl = cardElement.querySelector(".card__subtitle");
-  const cardChefEl = cardElement.querySelector(".card__chef-name");
-
   deleteButton.addEventListener("click", () => {
     const cardToDelete = deleteButton.closest(".card");
     if (cardToDelete) {
-      cardToDelete.remove();
+      fetch(`${apiUrl}api/dishes/${dish._id}`, {
+        method: "DELETE",
+      })
+        .then((response) => response.json())
+        .then(() => {
+          cardToDelete.remove();
+        })
+        .catch((error) => console.error("Error deleting dish:", error));
     }
   });
-  cardImageEl.addEventListener("click", (e) => {
-    e.preventDefault();
-    cardModalCaption.textContent = cardData.name;
-    openPopup(previewImageModal);
-  });
-
-  cardTitleEl.textContent = cardData.name;
-  cardSubtitleEl.textContent = cardData.name;
-  cardChefEl.textContent = cardData.name;
-  cardImageEl.src = cardData.link;
-  cardImageEl.alt = cardData.name;
-
-  return cardElement;
 }
-const addNewName = document.querySelector("#dish-input");
-const addNewType = document.querySelector("#dish-input");
-const addNewChefName = document.querySelector("#dish-input");
-const addNewImage = document.querySelector("#dish-input-url");
 
-cardAddForm.addEventListener("submit", (e) => {
+// Submit Add Dish Form
+addDishForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  const inputCard = {
-    name: addNewName.value,
-    link: addNewImage.value,
-    type: addNewType.value,
-    chefName: addNewChefName.value,
-  };
-  rendercard(inputCard, cardsWrap);
-  e.target.reset();
-  closePopup(cardAddModal);
+
+  const name = addNewName.value.trim();
+  const category = addNewCategory.value.trim();
+  const ingredients = addNewIngredients.value.trim();
+  const imageUrl = addNewImageUrl.value.trim();
+
+  if (name && category && ingredients && imageUrl) {
+    const dishData = { name, category, ingredients, imageUrl };
+    addNewDish(dishData);
+    closePopup(cardAddModal);
+  }
+});
+
+// Add a New Dish to the Database
+function addNewDish(dishData) {
+  fetch(`${apiUrl}api/dishes`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(dishData),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      renderCard(data, cardsWrap);
+      renderDinnerMenu(data);
+    })
+    .catch((error) => console.error("Error adding dish:", error));
+}
+
+// Initial Data Fetch on Load
+window.addEventListener("load", () => {
+  loadDishes();
+  getRSVPs();
 });
