@@ -212,7 +212,7 @@ function loadDishes() {
 
 // Function to Render Dish in the Dinner Menu Category
 function renderDinnerMenu(dish) {
-  const normalizedCategory = dish.category.trim(); // Normalize category by trimming spaces and ensuring the case matches the backend
+  const normalizedCategory = dish.category.trim(); // Normalize category
 
   const dishItem = document.createElement("li");
   dishItem.textContent = dish.name;
