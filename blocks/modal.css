@@ -103,6 +103,7 @@
   .modal__button:hover {
     transition: 0.5s;
     opacity: 0.6;
+    background-color: chocolate;
   }
   .modal__button_disabled {
     background: rgba(0, 0, 0, 0.8);
