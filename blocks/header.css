@@ -13,7 +13,7 @@
   );
   background-size: 400% 400%;
   animation: gradientShift 10s ease infinite;
-  padding-bottom: 40px;
+  padding-bottom: 30px;
 }
 
 @keyframes gradientShift {
