@@ -263,6 +263,7 @@ function getCardElement(dish) {
   const card = cardClone.querySelector(".card");
   card.querySelector(".card__title").textContent = dish.name;
   card.querySelector(".card__subtitle").textContent = dish.category;
+  card.querySelector(".card__back-paragraph").textContent = dish.ingredients;
   card.querySelector(".card__image").src = dish.imageUrl;
 
   const deleteButton = card.querySelector(".card__delete-button");

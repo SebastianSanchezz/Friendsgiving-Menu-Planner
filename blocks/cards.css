@@ -102,3 +102,13 @@
   align-self: flex-end;
   margin-top: auto;
 }
+
+.card__back-title {
+  margin: 0 auto 10px;
+  text-align: center;
+}
+
+.card__back-paragraph {
+  margin: 0 auto;
+  text-align: center;
+}
