@@ -66,6 +66,7 @@
 .card__subtitle {
   text-align: center;
   margin: 0 auto;
+  color:brown
 }
 
 .card__image {
@@ -81,12 +82,12 @@
   padding: 5px;
   border-radius: 4px;
   text-align: center;
-  border: 1px solid black;
+  border: 1px solid orangered;
   cursor: pointer;
   margin: 0 auto;
   width: fit-content;
-  background: white;
-  color: black;
+  background: rgb(223, 100, 18);
+  color: white;
 }
 
 .card__delete-button {
