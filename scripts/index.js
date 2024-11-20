@@ -215,6 +215,7 @@ function renderDinnerMenu(dish) {
   const normalizedCategory = dish.category.trim(); // Normalize category
 
   const dishItem = document.createElement("li");
+  dishItem.id = dish.name
   dishItem.textContent = dish.name;
 
   // Logging for debugging
@@ -265,9 +266,6 @@ function getCardElement(dish) {
   card.querySelector(".card__subtitle").textContent = dish.category;
   card.querySelector(".card__image").src = dish.imageUrl;
 
-  const deleteButton = card.querySelector(".card__delete-button");
-
-  deleteButton.addEventListener("click", () => deleteDish(dish._id));
 
   return card;
 }
@@ -279,6 +277,21 @@ function renderCard(dish, container) {
 
   const deleteButton = cardElement.querySelector(".card__delete-button");
   deleteButton.addEventListener("click", () => {
+
+    switch(dish.category){
+      case "Main Course":
+        mainCoursesList.removeChild(mainCoursesList.querySelector('#'+dish.name));
+      
+      case "Starter":
+        startersList.removeChild(startersList.querySelector('#'+dish.name));
+      case "Side Dish":
+        sideDishesList.removeChild(sideDishesList.querySelector('#'+dish.name));
+      case "Dessert":
+        dessertsList.removeChild(dessertsList.querySelector("#"+dish.name));
+      default:
+        console.log("No Menu items found");   
+      }
+    
     const cardToDelete = deleteButton.closest(".card");
     if (cardToDelete) {
       fetch(`${apiUrl}api/dishes/${dish._id}`, {
@@ -306,6 +319,7 @@ addDishForm.addEventListener("submit", (e) => {
     const dishData = { name, category, ingredients, imageUrl };
     addNewDish(dishData);
     closePopup(cardAddModal);
+    e.preventDefault();
   }
 });
 
@@ -321,16 +335,16 @@ function addNewDish(dishData) {
     .then((response) => response.json())
     .then((data) => {
       console.log("Dish data returned from API:", data);
-
+      let dish = data.dish;
       if (
-        data.dish &&
-        data.dish.name &&
-        data.dish.category &&
-        data.dish.ingredients &&
-        data.dish.imageUrl
+        dish &&
+        dish.name &&
+        dish.category &&
+        dish.ingredients &&
+        dish.imageUrl
       ) {
-        renderCard(data.dish, cardsWrap);
-        renderDinnerMenu(data.dish);
+        renderDinnerMenu(dish);
+        renderCard(dish, cardsWrap);
       } else {
         console.error("Incomplete dish data");
       }
