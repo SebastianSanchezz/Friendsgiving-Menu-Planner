@@ -1,4 +1,6 @@
 .footer__content {
+  background: linear-gradient(45deg, darkred 20%, crimson, darkorange 60%, gold, bisque);
   display: flex;
   justify-content: center;
+
 }

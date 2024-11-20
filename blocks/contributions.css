@@ -17,9 +17,21 @@
 .contributions__add-button {
   display: block;
   margin: 0 auto 10px;
-  background-color: black;
+  background-color: orangered;
   color: white;
   border-style: none;
   border-radius: 4px;
   cursor: pointer;
 }
+.contributions__add-button:hover {
+  opacity:1.2;
+  transform: scale(1.4);
+}
+
+.contributions__add-button.has-transition {
+  transition-delay: 0s;
+  transition: transform 150ms ease-in-out;
+}
+
+
+
