@@ -215,12 +215,12 @@ function renderDinnerMenu(dish) {
   const normalizedCategory = dish.category.trim(); // Normalize category
 
   const dishItem = document.createElement("li");
-  dishItem.id = dish.name
+  dishItem.id = dish.name;
   dishItem.textContent = dish.name;
 
   // Logging for debugging
-  console.log("Dish category (from API):", dish.category);
-  console.log("Normalized category (checked):", normalizedCategory);
+  // console.log("Dish category (from API):", dish.category);
+  // console.log("Normalized category (checked):", normalizedCategory);
 
   // Ensure list exists before append
   switch (normalizedCategory) {
@@ -266,7 +266,6 @@ function getCardElement(dish) {
   card.querySelector(".card__subtitle").textContent = dish.category;
   card.querySelector(".card__image").src = dish.imageUrl;
 
-
   addFlipBehavior(card);
 
   return card;
@@ -279,32 +278,47 @@ function renderCard(dish, container) {
 
   const deleteButton = cardElement.querySelector(".card__delete-button");
   deleteButton.addEventListener("click", () => {
-
-    switch(dish.category){
-      case "Main Course":
-        mainCoursesList.removeChild(mainCoursesList.querySelector('#'+dish.name));
-      
-      case "Starter":
-        startersList.removeChild(startersList.querySelector('#'+dish.name));
-      case "Side Dish":
-        sideDishesList.removeChild(sideDishesList.querySelector('#'+dish.name));
-      case "Dessert":
-        dessertsList.removeChild(dessertsList.querySelector("#"+dish.name));
-      default:
-        console.log("No Menu items found");   
-      }
-    
     const cardToDelete = deleteButton.closest(".card");
-    if (cardToDelete) {
-      fetch(`${apiUrl}api/dishes/${dish._id}`, {
-        method: "DELETE",
-      })
-        .then((response) => response.json())
-        .then(() => {
-          cardToDelete.remove();
-        })
-        .catch((error) => console.error("Error deleting dish:", error));
+    if (!cardToDelete) {
+      console.error("Card element not found");
+      return;
     }
+
+    fetch(`${apiUrl}api/dishes/${dish._id}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to delete dish");
+        }
+        return response.json();
+      })
+      .then(() => {
+        switch (dish.category) {
+          case "Main Course":
+            const mainCourseItem = mainCoursesList.querySelector(
+              "#" + dish.name
+            );
+            if (mainCourseItem) mainCoursesList.removeChild(mainCourseItem);
+            break;
+          case "Starter":
+            const starterItem = startersList.querySelector("#" + dish.name);
+            if (starterItem) startersList.removeChild(starterItem);
+            break;
+          case "Side Dish":
+            const sideDishItem = sideDishesList.querySelector("#" + dish.name);
+            if (sideDishItem) sideDishesList.removeChild(sideDishItem);
+            break;
+          case "Dessert":
+            const dessertItem = dessertsList.querySelector("#" + dish.name);
+            if (dessertItem) dessertsList.removeChild(dessertItem);
+            break;
+          default:
+            console.log("No Menu items found");
+        }
+        cardToDelete.remove();
+      })
+      .catch((error) => console.error("Error deleting dish:", error));
   });
 }
 
@@ -320,8 +334,11 @@ addDishForm.addEventListener("submit", (e) => {
   if (name && category && ingredients && imageUrl) {
     const dishData = { name, category, ingredients, imageUrl };
     addNewDish(dishData);
+
     closePopup(cardAddModal);
-    e.preventDefault();
+
+    // Reset the form inputs
+    addDishForm.reset();
   }
 });
 

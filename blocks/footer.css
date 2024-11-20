@@ -1,6 +1,29 @@
-.footer__content {
-  background: linear-gradient(45deg, darkred 20%, crimson, darkorange 60%, gold, bisque);
+.footer {
+  background: linear-gradient(
+    45deg,
+    darkred 20%,
+    crimson,
+    darkorange 60%,
+    gold,
+    bisque
+  );
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  margin: 0;
+  padding: 20px 0;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.2;
+}
 
+.footer__copyright {
+  margin: 0;
+  align-self: center;
+}
+
+.footer__authors {
+  margin: 10px 0 0;
+  align-self: center;
 }
