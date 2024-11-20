@@ -42,6 +42,7 @@
 .card__back {
   background-color: tan;
   transform: rotateY(180deg);
+  flex-direction: column;
 }
 
 .card.flipped .card__front {
@@ -66,7 +67,7 @@
 .card__subtitle {
   text-align: center;
   margin: 0 auto;
-  color:brown
+  color: brown;
 }
 
 .card__image {
@@ -102,4 +103,14 @@
 .card__back-button {
   align-self: flex-end;
   margin-top: auto;
+}
+
+.card__back-title {
+  margin: 0 auto 10px;
+  text-align: center;
+}
+
+.card__back-paragraph {
+  margin: 0 auto;
+  text-align: center;
 }
