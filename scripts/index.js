@@ -345,3 +345,18 @@ window.addEventListener("load", () => {
   loadDishes();
   getRSVPs();
 });
+
+document.querySelectorAll(".card").forEach((card) => {
+  const viewButton = card.querySelector(".card__ingredients-button");
+  const backButton = card.querySelector(".card__back-button");
+
+  // Flip to back on "View Ingredients" click
+  viewButton.addEventListener("click", () => {
+    card.classList.add("flipped");
+  });
+
+  // Flip to front on "Go Back" click
+  backButton.addEventListener("click", () => {
+    card.classList.remove("flipped");
+  });
+});
