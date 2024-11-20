@@ -4,9 +4,11 @@ Overview
 
     The Friendsgiving Menu Planner is a web application designed to help users organize and manage their Thanksgiving dinner by allowing them to create and manage a menu, track food contributions, and RSVP to the event. The application features a dynamic UI with interactive elements, including a countdown to Thanksgiving, a dish management system, and an RSVP functionality.
 
-Backend API
+Links
 
-    Link: https://github.com/gillty1995/Friendsgiving-Menu-Planner-Backend
+Backend API: https://github.com/gillty1995/Friendsgiving-Menu-Planner-Backend
+
+Deployed Website: https://friendsgiving-menu.fr.to
 
 Features
 
