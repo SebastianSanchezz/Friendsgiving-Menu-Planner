@@ -97,3 +97,8 @@
   background: none;
   color: grey;
 }
+
+.card__back-button {
+  align-self: flex-end;
+  margin-top: auto;
+}

@@ -269,6 +269,8 @@ function getCardElement(dish) {
 
   deleteButton.addEventListener("click", () => deleteDish(dish._id));
 
+  addFlipBehavior(card);
+
   return card;
 }
 
@@ -346,17 +348,25 @@ window.addEventListener("load", () => {
   getRSVPs();
 });
 
-document.querySelectorAll(".card").forEach((card) => {
+// Function for card flips
+function addFlipBehavior(card) {
   const viewButton = card.querySelector(".card__ingredients-button");
   const backButton = card.querySelector(".card__back-button");
 
-  // Flip to back on "View Ingredients" click
-  viewButton.addEventListener("click", () => {
-    card.classList.add("flipped");
-  });
+  if (viewButton) {
+    // Flip to back on "View Ingredients" click
+    viewButton.addEventListener("click", () => {
+      card.classList.add("flipped");
+    });
+  }
 
-  // Flip to front on "Go Back" click
-  backButton.addEventListener("click", () => {
-    card.classList.remove("flipped");
-  });
-});
+  if (backButton) {
+    // Flip to front on "Go Back" click
+    backButton.addEventListener("click", () => {
+      card.classList.remove("flipped");
+    });
+  }
+}
+
+// Card flip for all cards on page
+document.querySelectorAll(".card").forEach((card) => addFlipBehavior(card));
